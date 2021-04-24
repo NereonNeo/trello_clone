@@ -1,26 +1,35 @@
-import React from 'react';
-import logo from './logo.svg';
+import React, { useEffect, useState } from 'react';
+import { useSelector } from 'react-redux';
 import './App.css';
-
+import TrelloList from './Components/TrelloList';
+import TrelloActionButton from './Components/TrelloActionButton';
 function App() {
+  const list = useSelector((state) => state.List);
   return (
     <div className="App">
       <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
+        <div style={styles.container} className="container">
+          {list.map((element) => {
+            return (
+              <div>
+                <TrelloList
+                  key={element.id}
+                  title={element.title}
+                  cards={element.cards}
+                />
+              </div>
+            );
+          })}
+          <TrelloActionButton list />
+        </div>
       </header>
     </div>
   );
 }
+const styles = {
+  container: {
+    display: 'flex',
+  },
+};
 
 export default App;
