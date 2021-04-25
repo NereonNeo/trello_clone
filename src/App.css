@@ -1,9 +1,10 @@
 .App-header {
   color: black;
-  background: url('./assets/chicago-city-cityscape-city-lights-dusk-skyscrapers-skyline-1920x1080-4320.jpg');
+  background: url('./assets/grass-5999566_1920.jpg');
   background-repeat: no-repeat;
   background-position: center;
   min-height: 100vh;
+  user-select: none;
 }
 .container {
   padding-top: 10px;

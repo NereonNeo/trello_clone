@@ -9,3 +9,12 @@
 //     }
 //   };
 // };
+
+import {ADD_LIST} from "../types";
+
+export  function addList(title) {
+    return{
+        type:ADD_LIST,
+        payload:title
+    }
+}
