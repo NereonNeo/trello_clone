@@ -1,45 +1,71 @@
-import React, { useEffect, useState } from 'react';
-import { useSelector } from 'react-redux';
-import './App.css';
+import React  from 'react';
+import {useDispatch, useSelector} from 'react-redux';
 import TrelloList from './Components/TrelloList';
 import TrelloActionButton from './Components/TrelloActionButton';
-import {DragDropContext} from "react-beautiful-dnd";
+import {DragDropContext, Droppable} from "react-beautiful-dnd";
+import {sort} from "./store/Actions";
+import styled from "styled-components";
 function App() {
-  const list = useSelector((state) => state.List);
-  console.log(list)
-  function onDragEnd () {
-    //Todo render Logic
+    const dispatch = useDispatch()
+    const list = useSelector((state) => state.List);
+
+  function onDragEnd (result) {
+      const {destination,source,draggableId} = result
+      if(!destination){
+          return
+      }
+    dispatch(sort(
+        source.droppableId,
+        destination.droppableId,
+        source.index,
+        destination.index,
+        draggableId
+    ))
   }
   return (
       <DragDropContext onDragEnd={onDragEnd}>
-        <div className="App">
-          <header className="App-header">
-            <div style={styles.container} className="container">
-              {list.map((element) => {
-                return (
-                    <TrelloList
-                        key={element.id}
-                        title={element.title}
-                        cards={element.cards}
-                        lisID={element.id}
-                    />
-                );
-              })}
-              <TrelloActionButton list />
-            </div>
-          </header>
+          <div className="App">
+          <AppHeader>
+              <Droppable droppableId='all-lists' direction='horizontal' type='list'>
+                  {provided =>(
+                      <ListContainer {...provided.droppableProps} ref={provided.innerRef}>
+                          {list.map((element,index) => {
+                              return (
+                                  <TrelloList
+                                      key={element.id}
+                                      title={element.title}
+                                      cards={element.cards}
+                                      lisID={element.id}
+                                      index={index}
+                                  />
+                              );
+                          })}
+                          <TrelloActionButton list />
+                      </ListContainer>
+                  )}
+
+              </Droppable>
+          </AppHeader>
         </div>
       </DragDropContext>
   );
 }
-const styles = {
-  container: {
-    gridTemplateColumns: 'repeat(5 , 1fr)',
-    display: 'grid',
-    gridArea: 'center',
-    gridGap: 20,
-
-  },
-};
+const ListContainer = styled.div`
+        padding-top: 10px;
+        max-width: 1900px;
+        margin: 0 auto;
+        max-height: 100vh;
+        display: flex;
+        flex-direction: row;
+        flex-wrap: wrap;
+        align-content: stretch;
+        justify-content: space-around;
+    `
+const AppHeader = styled.div`
+  color: black;
+  min-height: 100vh;
+  max-height: 200vh;
+  user-select: none;
+`
 
 export default App;

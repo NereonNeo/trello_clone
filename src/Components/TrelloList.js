@@ -1,37 +1,42 @@
 import React from 'react';
 import TrelloActionButton from './TrelloActionButton';
 import TrelloCard from './TrelloCard';
-import {Droppable}  from "react-beautiful-dnd";
+import {Draggable, Droppable} from "react-beautiful-dnd";
+import styled from "styled-components";
 
-const TrelloList = ({ title, cards,lisID }) => {
+const TrelloList = ({ title, cards,lisID,index }) => {
   return (
-      <Droppable droppableId={String(lisID)}>
-        {provided=>(
-            <div {...provided.droppableProps} ref={provided.innerRef} style={styles.container}>
-              <h1>{title}</h1>
-              {cards.map((element,index) => {
-                return (
-                    <TrelloCard text={element.text} key={element.id} id={element.id} index={index}/>
-                );
-              })}
-              <TrelloActionButton listID={lisID} />
-              {provided.placeholder}
-            </div>
-            )
-        }
-      </Droppable>
+      <Draggable droppableId={String(lisID)} index={index}>
+          {provided => (
+              <Droppable droppableId={String(lisID)}>
+                  {provided=>(
+                      <TrelloListContainer {...provided.droppableProps} ref={provided.innerRef} >
+                          <h1>{title}</h1>
+                          {cards.map((element,index) => {
+                              return (
+                                  <TrelloCard text={element.text} key={element.id} id={element.id} index={index}/>
+                              );
+                          })}
+                          <TrelloActionButton listID={lisID} />
+                          {provided.placeholder}
+                      </TrelloListContainer>
+                  )
+                  }
+              </Droppable>
+          )}
+      </Draggable>
 
   );
 };
-const styles = {
-  container: {
-    backgroundColor: 'gray',
-    borderRadius: '5px',
-    width: 300,
-    padding: 8,
-    marginRight: 8,
-    height:' 100%'
-  },
-};
+const TrelloListContainer = styled.div`
+  background:linear-gradient(135deg, #d1d5db 0%,#a5abb5 100%);
+  border-radius: 5px;
+  width: 300px;
+  padding: 8px;
+  margin-right: 8px;
+  height: 100%;
+  margin-bottom:8px;
+`
+
 
 export default TrelloList;
