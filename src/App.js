@@ -10,7 +10,7 @@ function App() {
     const list = useSelector((state) => state.List);
 
   function onDragEnd (result) {
-      const {destination,source,draggableId} = result
+      const {destination,source,draggableId,type} = result
       if(!destination){
           return
       }
@@ -19,7 +19,8 @@ function App() {
         destination.droppableId,
         source.index,
         destination.index,
-        draggableId
+        draggableId,
+        type
     ))
   }
   return (

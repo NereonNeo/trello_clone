@@ -12,7 +12,8 @@ export  function sort(
     droppableIdEnd,
     droppableIndexStart,
     droppableIndexEnd,
-    droppableId
+    droppableId,
+    type
 ){
  return{
      type:DRAG_HAPPENED,
@@ -21,7 +22,8 @@ export  function sort(
          droppableIdEnd,
          droppableIndexStart,
          droppableIndexEnd,
-         droppableId
+         droppableId,
+         type
      }
  }
 }

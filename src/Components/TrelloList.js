@@ -6,11 +6,12 @@ import styled from "styled-components";
 
 const TrelloList = ({ title, cards,lisID,index }) => {
   return (
-      <Draggable droppableId={String(lisID)} index={index}>
+      <Draggable draggableId={String(lisID)} index={index}>
           {provided => (
+              <TrelloListContainer {...provided.draggableProps} ref={provided.innerRef} {...provided.dragHandleProps} >
               <Droppable droppableId={String(lisID)}>
                   {provided=>(
-                      <TrelloListContainer {...provided.droppableProps} ref={provided.innerRef} >
+                      <div {...provided.droppableProps} ref={provided.innerRef}>
                           <h1>{title}</h1>
                           {cards.map((element,index) => {
                               return (
@@ -19,10 +20,11 @@ const TrelloList = ({ title, cards,lisID,index }) => {
                           })}
                           <TrelloActionButton listID={lisID} />
                           {provided.placeholder}
-                      </TrelloListContainer>
+                      </div>
                   )
                   }
               </Droppable>
+              </TrelloListContainer>
           )}
       </Draggable>
 

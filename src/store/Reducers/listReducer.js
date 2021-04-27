@@ -34,9 +34,7 @@ export const listReducer = (state = initialState, action) => {
           return [
               ...state,newList
           ]
-    case ADD_CARD:
-
-
+    case ADD_CARD:{
         const newCard = {
             text: action.payload.text,
             id: `card-${cardID}`
@@ -53,6 +51,10 @@ export const listReducer = (state = initialState, action) => {
             }
         })
         return NewState
+    }
+
+
+
 
       case DRAG_HAPPENED:
           const {
@@ -60,9 +62,16 @@ export const listReducer = (state = initialState, action) => {
               droppableIdEnd,
               droppableIndexStart,
               droppableIndexEnd,
-              droppableId
+              droppableId,
+              type
           } = action.payload
           const newState = [...state];
+          //dragging list around
+          if(type === 'list'){
+              const list = newState.splice(droppableIndexStart,1)
+              newState.splice(droppableIndexEnd,0,...list)
+              return newState
+          }
           //in the same list
           if(droppableIdStart === droppableIdEnd){
             const list = state.find(list => droppableIdStart === list.id)
