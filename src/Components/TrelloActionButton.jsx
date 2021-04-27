@@ -19,15 +19,24 @@ const TrelloActionButton = ({ list,listID }) => {
     : 'Enter a title for this card';
   const formButtonTitle = list ? 'add list' : 'add card';
   const handleAddList =()=>{
+      const date = new Date()
+      const locale = 'ru-Ru'
+      const options ={
+          year: '2-digit', month: 'short', day: 'numeric',
+          hour: 'numeric', minute: 'numeric',
+          hour12: false
+      }
+      const allDate = date.toLocaleString(locale,options)
     if(input){
-        dispatch(addList(input))
+        dispatch(addList(input,allDate))
         setInput('')
     }
     return
   }
   const handleAddCard = ()=>{
+
       if(input){
-          dispatch(addCards(listID,input))
+          dispatch(addCards(listID,input,))
           setInput('')
       }
   }

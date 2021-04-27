@@ -1,10 +1,10 @@
 
 import {ADD_LIST, DELETE_LIST, DRAG_HAPPENED} from "../types";
 
-export  function addList(title) {
+export  function addList(title,allDate) {
     return{
         type:ADD_LIST,
-        payload:title
+        payload:{title,allDate}
     }
 }
 export  function sort(

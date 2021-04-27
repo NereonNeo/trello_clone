@@ -34,6 +34,7 @@ function App() {
                           {list.map((element,index) => {
                               return (
                                   <TrelloList
+                                      time={element.time}
                                       key={element.id}
                                       title={element.title}
                                       cards={element.cards}

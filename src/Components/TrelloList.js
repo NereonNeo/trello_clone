@@ -7,7 +7,7 @@ import {Button} from "@material-ui/core";
 import {useDispatch} from "react-redux";
 import {deleteList} from "../store/Actions";
 
-const TrelloList = ({ title, cards,lisID,index }) => {
+const TrelloList = ({ title, cards,lisID,index,time }) => {
     const dispatch = useDispatch()
     function handleButtonClick() {
         dispatch(deleteList(lisID))
@@ -20,14 +20,14 @@ const TrelloList = ({ title, cards,lisID,index }) => {
                   {provided=>(
                       <div {...provided.droppableProps} ref={provided.innerRef} >
                           <div style={{width:'100%',overflow:"hidden",display:'flex',justifyContent:'space-around',alignItems:'center'}}>
-                              <h1>{title}</h1>
+                              <h1>{title} </h1>
                               <Button
                                   variant="outlined"
                                   color="secondary"
                                   style={{height:'30px'}}
                                   onClick={handleButtonClick}
                               >
-                                  Delete
+                                  ❌
                               </Button>
                           </div>
                           {cards.map((element,index) => {
@@ -36,6 +36,7 @@ const TrelloList = ({ title, cards,lisID,index }) => {
                               );
                           })}
                           <TrelloActionButton listID={lisID} />
+                          <span style={{fontSize:'14px'}}>{time}</span>
                           {provided.placeholder}
                       </div>
                   )

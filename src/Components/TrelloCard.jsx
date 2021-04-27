@@ -9,10 +9,10 @@ const TrelloCard = ({ text,id,index }) => {
         {provided => (
             <TrelloCardContainer ref={provided.innerRef} {...provided.draggableProps} {...provided.dragHandleProps}>
               <div>
-                <Card >
-                  <CardContent >
-                    <Typography color="textSecondary" gutterBottom>
-                      <p style={{width:'100%'}}>{text}</p>
+                <Card>
+                  <CardContent  >
+                    <Typography  color="textSecondary" gutterBottom>
+                        {text}
                     </Typography>
                   </CardContent>
                 </Card>

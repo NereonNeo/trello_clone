@@ -1,23 +1,16 @@
 import {ADD_CARD, ADD_LIST, DELETE_LIST, DRAG_HAPPENED} from "../types";
 let listID = 1
-let cardID = 4
+let cardID = 2
 const initialState = [
   {
     title: 'Good luck',
+      time:'27 апр. 21 г., 21:03',
     id: `list-${0}`,
     cards: [
       {
         id: `card-${1}`,
-        text: 'Yoo can anything just starting 1 ',
+        text: 'This is an example you can delete list   ',
       },
-        {
-            id: `card-${2}`,
-            text: 'Yoo can anything just starting 2',
-        },
-        {
-            id: `card-${3}`,
-            text: 'Yoo can anything just starting 3',
-        },
     ],
   },
 
@@ -26,7 +19,8 @@ export const listReducer = (state = initialState, action) => {
   switch (action.type) {
     case ADD_LIST:
         const newList ={
-          title:action.payload,
+          title:action.payload.title,
+            time:action.payload.allDate.toString(),
           cards:[],
           id: `list-${listID}`
       }
