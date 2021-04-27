@@ -3,12 +3,11 @@ import { Button, Card } from '@material-ui/core';
 import AddSharpIcon from '@material-ui/icons/AddSharp';
 import CloseSharpIcon from '@material-ui/icons/CloseSharp';
 import TextareaAutosize from 'react-textarea-autosize';
-import {useDispatch, useSelector} from "react-redux";
+import {useDispatch} from "react-redux";
 import {addList,addCards} from "../store/Actions/";
 
 const TrelloActionButton = ({ list,listID }) => {
     const dispatch = useDispatch();
-    const state = useSelector(state => state.List)
   const [form, setForm] = useState(false);
   const [input, setInput] = useState('');
   const buttonText = list ? 'Add another list' : 'Add another card';

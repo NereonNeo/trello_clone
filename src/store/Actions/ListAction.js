@@ -1,5 +1,5 @@
 
-import {ADD_LIST, DRAG_HAPPENED} from "../types";
+import {ADD_LIST, DELETE_LIST, DRAG_HAPPENED} from "../types";
 
 export  function addList(title) {
     return{
@@ -26,4 +26,10 @@ export  function sort(
          type
      }
  }
+}
+export function deleteList(num){
+    return{
+        type: DELETE_LIST,
+        payload:num
+    }
 }

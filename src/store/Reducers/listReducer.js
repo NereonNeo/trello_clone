@@ -1,4 +1,4 @@
-import {ADD_CARD, ADD_LIST, DRAG_HAPPENED} from "../types";
+import {ADD_CARD, ADD_LIST, DELETE_LIST, DRAG_HAPPENED} from "../types";
 let listID = 1
 let cardID = 4
 const initialState = [
@@ -52,17 +52,12 @@ export const listReducer = (state = initialState, action) => {
         })
         return NewState
     }
-
-
-
-
-      case DRAG_HAPPENED:
+    case DRAG_HAPPENED:
           const {
               droppableIdStart,
               droppableIdEnd,
               droppableIndexStart,
               droppableIndexEnd,
-              droppableId,
               type
           } = action.payload
           const newState = [...state];
@@ -91,6 +86,8 @@ export const listReducer = (state = initialState, action) => {
               listEnd.cards.splice(droppableIndexEnd,0,...card)
           }
           return  newState
+      case DELETE_LIST:
+          return  state.filter((x,)=> x.id !== action.payload)
     default:
       return state;
   }

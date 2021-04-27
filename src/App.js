@@ -27,6 +27,7 @@ function App() {
       <DragDropContext onDragEnd={onDragEnd}>
           <div className="App">
           <AppHeader>
+              <h1>Trello Clone</h1>
               <Droppable droppableId='all-lists' direction='horizontal' type='list'>
                   {provided =>(
                       <ListContainer {...provided.droppableProps} ref={provided.innerRef}>
@@ -63,6 +64,7 @@ const ListContainer = styled.div`
         justify-content: space-around;
     `
 const AppHeader = styled.div`
+  text-align: center;
   color: black;
   min-height: 100vh;
   max-height: 200vh;
